@@ -1,0 +1,22 @@
+version: '3.5'
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - './data/mysql:/data/mysql'
+    ports:
+      - 3306:3306
+    command: --default-authentication-plugin=mysql_native_password
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+
+volumes:
+  data:
