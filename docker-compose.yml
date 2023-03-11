@@ -8,8 +8,8 @@ services:
     environment:
       MYSQL_DATABASE: mydb
       MYSQL_USER: mysql
-      MYSQL_PASSWORD: admin
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: admin
     volumes:
       - './data/mysql:/data/mysql'
     ports:
