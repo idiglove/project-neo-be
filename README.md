@@ -43,6 +43,9 @@ $ yarn run start:dev
 
 # production mode
 $ yarn run start:prod
+
+# run local database
+$ yarn run start:db
 ```
 
 ## Test
