@@ -13,10 +13,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-      - run: npm install
-      - run: npx prisma generate
-      - run: npm run build
-      - run: npm test
+      - run: yarn
+      - run: yarn prisma generate
+      - run: yarn run build
+      - run: yarn test
 
   Run-build-test-windows:
     name: Build and Test on windows
@@ -26,10 +26,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-      - run: npm install
-      - run: npx prisma generate
-      - run: npm run build
-      - run: npm test
+      - run: yarn install
+      - run: yarn prisma generate
+      - run: yarn run build
+      - run: yarn test
   Run-build-test-macos:
     name: Build and Test on macos
     runs-on: macos-latest
@@ -38,7 +38,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-      - run: npm install
-      - run: npx prisma generate
-      - run: npm run build
-      - run: npm test
+      - run: yarn install
+      - run: yarn prisma generate
+      - run: yarn run build
+      - run: yarn test
