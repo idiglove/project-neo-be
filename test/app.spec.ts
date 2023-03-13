@@ -5,25 +5,23 @@ import * as pactum from 'pactum';
 import { AppModule } from './../src/app.module';
 import { PrismaService } from '../src/prisma/prisma.service';
 import { AuthDto } from '../src/auth/dto';
+import { AppService } from 'src/app.service';
+import { AppController } from 'src/app.controller';
 
+describe('AppController', () => {
+  let appController: AppController;
+  beforeEach(async () => {
+    const app: TestingModule = await Test.createTestingModule({
+      controllers: [AppController],
+      providers: [AppService],
+    }).compile();
+
+    appController = app.get<AppController>(AppController);
+  });
+});
 describe('AppController (e2e)', () => {
   let app: INestApplication;
   let prisma: PrismaService;
-  // beforeEach(async () => {
-  //   const moduleFixture: TestingModule = await Test.createTestingModule({
-  //     imports: [AppModule],
-  //   }).compile();
-
-  //   app = moduleFixture.createNestApplication();
-  //   await app.init();
-  // });
-
-  // it('/ (GET)', () => {
-  //   return request(app.getHttpServer())
-  //     .get('/')
-  //     .expect(200)
-  //     .expect('Hello World!');
-  // });
 
   beforeAll(async () => {
     const moduleRef: TestingModule = await Test.createTestingModule({
