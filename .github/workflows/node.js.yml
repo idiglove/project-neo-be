@@ -1,8 +1,11 @@
 name: Build and Test
 
 on:
+  push:
+    branches: 
+      - master
   pull_request:
-    branches: ['master', 'feature/**', 'bugfix/**', 'hotfix/**']
+    branches: ['feature/**', 'bugfix/**', 'hotfix/**']
 
 jobs:
   Run-build-test-ubuntu:
