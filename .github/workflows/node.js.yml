@@ -18,8 +18,8 @@ jobs:
           node-version: '18.x'
       - run: yarn
       - run: yarn prisma generate
-      - run: yarn run build
       - run: yarn test
+      - run: yarn run build
 
   Run-build-test-windows:
     name: Build and Test on windows
@@ -31,8 +31,8 @@ jobs:
           node-version: '18.x'
       - run: yarn install
       - run: yarn prisma generate
-      - run: yarn run build
       - run: yarn test
+      - run: yarn run build
   Run-build-test-macos:
     name: Build and Test on macos
     runs-on: macos-latest
@@ -43,5 +43,5 @@ jobs:
           node-version: '18.x'
       - run: yarn install
       - run: yarn prisma generate
-      - run: yarn run build
       - run: yarn test
+      - run: yarn run build
