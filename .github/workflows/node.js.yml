@@ -22,7 +22,7 @@ jobs:
     name: Build and Test on ubuntu
     runs-on: ubuntu-latest
     env:
-      DATABASE_URL: "mysql://mysql:admin@localhost:3306/mydb?connection_limit=2"
+      DATABASE_URL: mysql://mysql:admin@localhost:3306/mydb?connection_limit=2
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
