@@ -8,7 +8,7 @@ on:
     branches: ["master", "feature/**", "bugfix/**", "hotfix/**"]
 
 jobs:
-  Run-build-test-ubuntu:
+  build:
     services:
       mysql:
         image: mysql
@@ -33,10 +33,10 @@ jobs:
         run: yarn install
       - name: Generate Prisma client
         run: yarn prisma generate
-      - name: Lint code
-        run: yarn lint
       - name: Run Test
         run: yarn test
+      - name: Lint code
+        run: yarn lint
       - name: Build project
         run: yarn run build
 
