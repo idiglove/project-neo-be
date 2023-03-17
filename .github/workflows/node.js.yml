@@ -7,30 +7,22 @@ on:
   pull_request:
     branches: ["master", "feature/**", "bugfix/**", "hotfix/**"]
 
-env:
-  MYSQL_DATABASE: mydb
-  MYSQL_USER: mysql
-  MYSQL_PASSWORD: password
-  MYSQL_ROOT_PASSWORD: admin
-  MYSQL_HOST: localhost
-  MYSQL_PORT: 3306
-
 jobs:
   Run-build-test-ubuntu:
     services:
       mysql:
         image: mysql
         env:
-          MYSQL_DATABASE: $MYSQL_DATABASE
-          MYSQL_USER: $MYSQL_USER
-          MYSQL_PASSWORD: $MYSQL_PASSWORD
-          MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+          MYSQL_DATABASE: mydb
+          MYSQL_USER: mysql
+          MYSQL_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: admin
         ports:
           - 3306:3306
     name: Build and Test on ubuntu
     runs-on: ubuntu-latest
     env:
-      DATABASE_URL: "mysql://${{env.MYSQL_USER}}:${{env.MYSQL_ROOT_PASSWORD}}@${{env.MYSQL_HOST}}:${{env.MYSQL_PORT}}/${{env.MYSQL_DATABASE}}?connection_limit=2"
+      DATABASE_URL: "mysql://mysql:admin@localhost:3306/mydb?connection_limit=2"
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
