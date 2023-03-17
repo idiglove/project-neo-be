@@ -7,7 +7,27 @@ on:
   pull_request:
     branches: ["master", "feature/**", "bugfix/**", "hotfix/**"]
 
+env:
+  MYSQL_DATABASE: mydb
+  MYSQL_USER: mysql
+  MYSQL_PASSWORD: password
+  MYSQL_ROOT_PASSWORD: admin
+  MYSQL_HOST: localhost
+  MYSQL_PORT: 3306
+
 jobs:
+  container-job:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql
+        env:
+          MYSQL_DATABASE: $MYSQL_DATABASE
+          MYSQL_USER: $MYSQL_USER
+          MYSQL_PASSWORD: $MYSQL_PASSWORD
+          MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+        ports:
+          - 3306:3306
   Run-build-test-ubuntu:
     name: Build and Test on ubuntu
     runs-on: ubuntu-latest
@@ -16,7 +36,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
-      - run: yarn
+        env:
+          DATABASE_URL: "mysql://$MYSQL_USER:$MYSQL_ROOT_PASSWORD@$MYSQL_HOST:$MYSQL_PORT/$MYSQL_DATABASE?connection_limit=2"
+      - run: echo "$DATABASE_URL ubuntu"
+      - run: yarn install
       - run: yarn prisma generate
       - run: yarn lint
       - run: yarn test
@@ -30,6 +53,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
+        env:
+          DATABASE_URL: "mysql://$MYSQL_USER:$MYSQL_ROOT_PASSWORD@$MYSQL_HOST:$MYSQL_PORT/$MYSQL_DATABASE?connection_limit=2"
+      - run: echo "$DATABASE_URL windows"
       - run: yarn install
       - run: yarn prisma generate
       - run: yarn lint
@@ -43,6 +69,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
+        env:
+          DATABASE_URL: "mysql://$MYSQL_USER:$MYSQL_ROOT_PASSWORD@$MYSQL_HOST:$MYSQL_PORT/$MYSQL_DATABASE?connection_limit=2"
+      - run: echo "$DATABASE_URL macos"
       - run: yarn install
       - run: yarn prisma generate
       - run: yarn lint
