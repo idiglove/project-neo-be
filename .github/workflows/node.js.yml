@@ -2,10 +2,10 @@ name: Build and Test
 
 on:
   push:
-    branches: 
+    branches:
       - master
   pull_request:
-    branches: ["master",'feature/**', 'bugfix/**', 'hotfix/**']
+    branches: ["master", "feature/**", "bugfix/**", "hotfix/**"]
 
 jobs:
   Run-build-test-ubuntu:
@@ -15,9 +15,10 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: "18.x"
       - run: yarn
       - run: yarn prisma generate
+      - run: yarn lint
       - run: yarn test
       - run: yarn run build
 
@@ -28,9 +29,10 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: "18.x"
       - run: yarn install
       - run: yarn prisma generate
+      - run: yarn lint
       - run: yarn test
       - run: yarn run build
   Run-build-test-macos:
@@ -40,8 +42,9 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: "18.x"
       - run: yarn install
       - run: yarn prisma generate
+      - run: yarn lint
       - run: yarn test
       - run: yarn run build
