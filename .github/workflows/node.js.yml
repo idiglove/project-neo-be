@@ -16,8 +16,7 @@ env:
   MYSQL_PORT: 3306
 
 jobs:
-  container-job:
-    runs-on: ubuntu-latest
+  Run-build-test-ubuntu:
     services:
       mysql:
         image: mysql
@@ -28,7 +27,6 @@ jobs:
           MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
         ports:
           - 3306:3306
-  Run-build-test-ubuntu:
     name: Build and Test on ubuntu
     runs-on: ubuntu-latest
     steps:
@@ -45,23 +43,33 @@ jobs:
       - run: yarn test
       - run: yarn run build
 
-  Run-build-test-windows:
-    name: Build and Test on windows
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "18.x"
-        env:
-          DATABASE_URL: "mysql://$MYSQL_USER:$MYSQL_ROOT_PASSWORD@$MYSQL_HOST:$MYSQL_PORT/$MYSQL_DATABASE?connection_limit=2"
-      - run: echo "$DATABASE_URL windows"
-      - run: yarn install
-      - run: yarn prisma generate
-      - run: yarn lint
-      - run: yarn test
-      - run: yarn run build
+  # Run-build-test-windows:
+  #   name: Build and Test on windows
+  #   runs-on: windows-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: "18.x"
+  #       env:
+  #         DATABASE_URL: "mysql://$MYSQL_USER:$MYSQL_ROOT_PASSWORD@$MYSQL_HOST:$MYSQL_PORT/$MYSQL_DATABASE?connection_limit=2"
+  #     - run: echo "$DATABASE_URL windows"
+  #     - run: yarn install
+  #     - run: yarn prisma generate
+  #     - run: yarn lint
+  #     - run: yarn test
+  #     - run: yarn run build
   Run-build-test-macos:
+    services:
+      mysql:
+        image: mysql
+        env:
+          MYSQL_DATABASE: $MYSQL_DATABASE
+          MYSQL_USER: $MYSQL_USER
+          MYSQL_PASSWORD: $MYSQL_PASSWORD
+          MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+        ports:
+          - 3306:3306
     name: Build and Test on macos
     runs-on: macos-latest
     steps:
