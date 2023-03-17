@@ -28,7 +28,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
-      - run: node ./scripts/db.js
       - run: yarn install
       - run: yarn prisma generate
       - run: yarn lint
