@@ -9,27 +9,25 @@ on:
 
 jobs:
   Run-build-test-ubuntu:
-    # services:
-    #   mysql:
-    #     image: mysql
-    #     env:
-    #       MYSQL_DATABASE: mydb
-    #       MYSQL_USER: mysql
-    #       MYSQL_PASSWORD: password
-    #       MYSQL_ROOT_PASSWORD: admin
-    #     ports:
-    #       - 3306:3306
-    name: Build and Test on ubuntu
+    services:
+      mysql:
+        image: mysql
+        env:
+          MYSQL_DATABASE: mydb
+          MYSQL_USER: mysql
+          MYSQL_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: admin
+        ports:
+          - 3306:3306
     runs-on: ubuntu-latest
     env:
-      DATABASE_URL: mysql://mysql:admin@mysql:3306/mydb?connection_limit=2
+      DATABASE_URL: ${{secrets.DATABASE_URL}}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
       - run: yarn install
-      - run: yarn run start:db
       - run: yarn prisma generate
       - run: yarn lint
       - run: yarn test
