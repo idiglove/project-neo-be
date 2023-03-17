@@ -5,8 +5,8 @@ import * as pactum from "pactum"
 import {AppModule} from "./../src/app.module"
 import {PrismaService} from "../src/prisma/prisma.service"
 import {AuthDto} from "../src/auth/dto"
-import {AppService} from "src/app.service"
-import {AppController} from "src/app.controller"
+import {AppService} from "../src/app.service"
+import {AppController} from "../src/app.controller"
 
 describe("AppController", () => {
   let appController: AppController
@@ -19,6 +19,7 @@ describe("AppController", () => {
     appController = app.get<AppController>(AppController)
   })
 })
+
 describe("AppController (e2e)", () => {
   let app: INestApplication
   let prisma: PrismaService
