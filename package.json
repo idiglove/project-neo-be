@@ -23,8 +23,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --watch --config ./test/jest-e2e.json",
     "start:db": " docker-compose -p mysql up -d",
-    "postinstall": "husky install",
-    "prepare": "husky install"
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
